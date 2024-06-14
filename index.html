@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notebook</title>
+    <link
+      rel="shortcut icon"
+      href="ressources/favicon/favicon.ico"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="assets/js/helperFunction.js"></script>
+    <script src="assets/js/htmlStrings.js"></script>
+    <script src="assets/js/work.js"></script>
+    <script src="assets/js/script.js"></script>
+  </head>
+  <body onload="render()">
+    <div id="limiter">
+      <header>
+        <h1>Notizbuch</h1>
+        <nav>
+          <a href="#">
+            <img
+              id="folder"
+              src="ressources/icons/folder-solid.svg"
+              alt="folder"
+              class="icon"
+              onclick="openWindow('archivFolder')"
+            />
+            <span id="counterArchive" class="counter"></span>
+          </a>
+          <div id="archivFolder" class="window d-none">
+            <img
+              src="ressources/icons/circle-xmark-regular.svg"
+              alt="x-icon"
+              class="icon close"
+              onclick="closeWindow('archivFolder')"
+            />
+            <h2>Archiv</h2>
+            <div id="archiv" class="subfolder"></div>
+          </div>
+          <a href="#">
+            <img
+              src="ressources/icons/trash-solid.svg"
+              alt="trash"
+              class="icon"
+              onclick="openWindow('trashFolder')"
+            />
+            <span id="counterTrash" class="counter"></span>
+          </a>
+          <div id="trashFolder" class="window d-none">
+            <img
+              src="ressources/icons/circle-xmark-regular.svg"
+              alt="x-icon"
+              class="icon close"
+              onclick="closeWindow('trashFolder')"
+            />
+            <h2>Papierkorb</h2>
+            <button onclick="deleteAll()">Alle Löschen</button>
+            <div id="trash" class="subfolder"></div>
+          </div>
+        </nav>
+        <section class="newPost" id="newPost">
+          <input
+            id="title"
+            type="text"
+            placeholder="Neue Notiz . . ."
+            onfocus="showNewPost()"
+          />
+          <textarea
+            id="note"
+            class="d-none"
+            placeholder="Hier deine Notiz"
+          ></textarea>
+          <form class="d-none" id="radio">
+            <label for="standard">
+              <input
+                type="radio"
+                name="label"
+                id="standard"
+                onchange="addBgStandard('newPost')"
+                value="standard"
+                checked
+              />
+                Standard
+            </label>
+            <label for="important">
+              <input
+                type="radio"
+                name="label"
+                id="important"
+                value="important"
+                onchange="addBgImportant('newPost')"
+              />
+                Wichtig!
+            </label>
+            <label for="todo">
+              <input
+                type="radio"
+                name="label"
+                id="todo"
+                onchange="addBgTodo('newPost')"
+                value="todo"
+              />
+              ToDo
+            </label>
+            <input type="reset" value="" class="d-none" />
+          </form>
+          <span class="buttons">
+            <button
+              class="d-none"
+              id="saveNote"
+              onclick="savePost('empty', 'newPost')">
+                Speichern
+            </button>
+            <button
+              class="d-none"
+              id="abortNote"
+              onclick="abortPost('newPost')">
+                Abbrechen
+            </button>
+          </span>
+        </section>
+      </header>
+      <section id="savedPost"></section>
+      <section id="popups">
+        <div id="error" class="d-none"></div>
+        <div id="postBig" class="d-none"></div>
+      </section>
+    </div>
+  </body>
+</html>
